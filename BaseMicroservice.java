@@ -29,7 +29,7 @@ public abstract class BaseMicroservice implements Microservice {
     @Override
     public void sendMessage(String serverId, String serviceId, String message) {
         if (this.server != null) {
-            this.server.sendMessageToOtherServer(this.server.getId(), serverId, this.name, serviceId, message);
+            this.server.sendMessage(this.server.getId(), serverId, this.name, this.id, serviceId, message);
         }
     }
 }

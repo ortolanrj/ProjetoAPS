@@ -4,5 +4,5 @@ public class CheckoutService extends BaseMicroservice {
     }
 
     @Override
-    public void handleRequest(String from, String message) {}
+    public void handleRequest(String fromService, String fromServiceId, String message) {}
 }

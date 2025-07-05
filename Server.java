@@ -20,28 +20,28 @@ public class Server {
 
     public boolean addService(Microservice microservice) {
         if (services.size() >= capacity) {
-            System.out.println("Server at full capacity. Cannot add " + microservice.getName());
+            // System.out.println("Server[id:" + this.id + "] at full capacity. Cannot add " + microservice.getName() + "[id:" + microservice.getId() + "].");
             return false;
         }
 
         microservice.setServer(this);
-        services.put(microservice.getName(), microservice);
-        System.out.println("Service " + microservice.getName() + " added to server.");
+        services.put(microservice.getId(), microservice);
+        System.out.println("Service " + microservice.getName() + "[id:" + microservice.getId() + "] added to server[id:" + this.id + "].");
         return true;
     }
 
-    public void receiveMessage(String fromService, String toService, String message) {
-        Microservice service = services.get(toService);
+    public void receiveMessage(String fromService, String fromServiceId, String toServiceId, String message) {
+        Microservice service = services.get(toServiceId);
         if (service != null) {
-            service.handleRequest(fromService, message);
+            service.handleRequest(fromService, fromServiceId, message);
         } else {
-            System.out.println("Service " + toService + " not found on Server " + id);
+            System.out.println("Service " + toServiceId + " not found on Server " + this.id);
         }
     }
 
-    public void sendMessageToOtherServer(String fromServerId, String toServerId, String fromService, String toService, String message) {
+    public void sendMessage(String fromServerId, String toServerId, String fromService, String fromServiceId, String toServiceId, String message) {
         if (serverManager != null) {
-            serverManager.routeMessage(this.getId(), toServerId, fromService, toService, message);
+            serverManager.routeMessage(fromServerId, toServerId, fromService, fromServiceId, toServiceId, message);
         }
     }
 

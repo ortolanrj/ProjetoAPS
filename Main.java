@@ -1,45 +1,43 @@
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<Server> servers = new ArrayList<>();
+        ServerManager manager = new ServerManager();
 
         Server server1 = new Server(3);
-        Server server2 = new Server(3);
-        Server server3 = new Server(1);
+        Server server2 = new Server(4);
+        Server server3 = new Server(5);
 
-        servers.addAll(List.of(server1, server2, server3));
+        manager.addServer(server1);
+        manager.addServer(server2);
+        manager.addServer(server3);
 
         Microservice checkout1 = new CheckoutService();
         Microservice payment1 = new PaymentService();
+        Microservice inventory1 = new InventoryService();
         Microservice checkout2 = new CheckoutService();
         Microservice payment2 = new PaymentService();
+        Microservice inventory2 = new InventoryService();
         Microservice checkout3 = new CheckoutService();
         Microservice payment3 = new PaymentService();
+        Microservice inventory3 = new InventoryService();
         
-        deployService(servers, checkout1);
-        deployService(servers, payment1);
-        deployService(servers, checkout2);
-        deployService(servers, payment2);
-        deployService(servers, checkout3);
-        deployService(servers, payment3);
+        manager.deployService(checkout1);
+        manager.deployService(payment1);
+        manager.deployService(inventory1);
+        manager.deployService(checkout2);
+        manager.deployService(payment2);
+        manager.deployService(inventory2);
+        manager.deployService(checkout3);
+        manager.deployService(payment3);
+        manager.deployService(inventory3);
 
         // Simular um fluxo de comunicação
-        checkout1.sendMessage(server1.getId(), payment1.getId(), "process_payment");
-        checkout2.sendMessage(server2.getId(), payment2.getId(), "process_payment");
-        checkout3.sendMessage(server2.getId(), payment3.getId(), "process_payment");
+        checkout1.sendMessage(server1.getId(), inventory1.getId(), "check_inventory|productX");
+        checkout2.sendMessage(server2.getId(), inventory2.getId(), "check_inventory|productY");
+        checkout3.sendMessage(server3.getId(), inventory3.getId(), "check_inventory|productY");
+
+        inventory1.sendMessage(server1.getId(), payment1.getId(), "process_payment");
+        inventory2.sendMessage(server2.getId(), payment2.getId(), "process_payment");
+        inventory3.sendMessage(server3.getId(), payment3.getId(), "process_payment");
     }
-
-
-    public static boolean deployService(List<Server> servers, Microservice service) {
-        for (Server server : servers) {
-            if (server.addService(service)) {
-                return true;
-            }
-        }
-        System.out.println("All servers are full. Could not deploy " + service.getName());
-        return false;
-    }
-
 }
