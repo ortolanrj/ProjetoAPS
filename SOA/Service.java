@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 abstract class Service {
    private final String name; 
+   
    private final HashMap<String, ArrayList<String>> db;
    private final ServiceBus bus;
 

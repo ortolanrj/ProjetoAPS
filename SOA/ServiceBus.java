@@ -3,10 +3,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ServiceBus{
-    private final HashMap<String, ArrayList<Service>> subscribers = new HashMap<>(); 
+    private final HashMap<String, ArrayList<Service>> subscribers;
+
+    public ServiceBus(){
+        this.subscribers = new HashMap<>();
+    }
 
     public void subscribe(String topic, Service service){
-        ArrayList<Service> subscribersList = subscribers.get(topic);
+        ArrayList<Service> subscribersList = subscribers.getOrDefault(topic, new ArrayList<Service>());
         if (!subscribersList.contains(service)) {
             subscribersList.add(service);
         }
@@ -14,12 +18,14 @@ public class ServiceBus{
         System.out.println(service.getName() + " subiscribed to topic: " + topic + ".");
     }
 
-    public void publishMensage(Message message){
+    public void publishMessage(Message message){
        ArrayList<Service> subscribersList = subscribers.get(message.getTopic());
-       for(Service service : subscribersList){
-            service.handleRequest(message.getTopic(), message.getPayload(), message.getAuthor());
+       System.out.println(message.getAuthor() + " has published a message in the topic: " + message.getTopic() + "."); 
+       if (subscribersList != null){
+            for(Service service : subscribersList){
+                service.handleRequest(message.getTopic(), message.getPayload(), message.getAuthor());
+            }
        }
-       System.out.println(""); 
     }
 
 }
