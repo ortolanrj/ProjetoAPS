@@ -1,7 +1,12 @@
-package SOA;
+package org.uerj.projetoaps.soa.services;
+
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import org.uerj.projetoaps.soa.Message;
+import org.uerj.projetoaps.soa.Service;
+import org.uerj.projetoaps.soa.ServiceBus;
 
 public class ShoppingService extends Service {
 

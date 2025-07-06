@@ -1,4 +1,5 @@
-package SOA;
+package org.uerj.projetoaps.soa;
+
 public class Message {
    private final String payload; 
    private final String topic;

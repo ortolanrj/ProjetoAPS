@@ -1,4 +1,4 @@
-package SOA;
+package org.uerj.projetoaps.soa;
 import java.util.ArrayList;
 import java.util.HashMap;
 

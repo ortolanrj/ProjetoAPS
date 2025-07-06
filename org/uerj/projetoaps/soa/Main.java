@@ -1,6 +1,10 @@
-package SOA;
+package org.uerj.projetoaps.soa;
 
 import java.util.HashMap;
+
+import org.uerj.projetoaps.soa.services.ShoppingService;
+import org.uerj.projetoaps.soa.services.UserService;
+
 import java.util.ArrayList;
 
 public class Main {

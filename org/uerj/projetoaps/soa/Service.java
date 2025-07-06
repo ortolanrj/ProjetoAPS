@@ -1,8 +1,8 @@
-package SOA;
+package org.uerj.projetoaps.soa;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-abstract class Service {
+public abstract class Service {
    private final String name; 
    
    private final HashMap<String, ArrayList<String>> db;

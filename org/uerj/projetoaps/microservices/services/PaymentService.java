@@ -1,4 +1,8 @@
-public class PaymentService extends BaseMicroservice {
+package org.uerj.projetoaps.microservices.services;
+
+import org.uerj.projetoaps.microservices.Microservice;
+
+public class PaymentService extends Microservice {
     public PaymentService() {
         super("PaymentService");
     }

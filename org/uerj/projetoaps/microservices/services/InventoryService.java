@@ -1,6 +1,11 @@
+package org.uerj.projetoaps.microservices.services;
+
+
 import java.util.HashMap;
 
-public class InventoryService extends BaseMicroservice{
+import org.uerj.projetoaps.microservices.Microservice;
+
+public class InventoryService extends Microservice{
     private final HashMap<String, Integer> dbInventory = new HashMap<>();
 
     public InventoryService() {

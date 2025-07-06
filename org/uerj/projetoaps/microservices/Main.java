@@ -1,3 +1,8 @@
+package org.uerj.projetoaps.microservices;
+
+import org.uerj.projetoaps.microservices.services.CheckoutService;
+import org.uerj.projetoaps.microservices.services.InventoryService;
+import org.uerj.projetoaps.microservices.services.PaymentService;
 
 public class Main {
     public static void main(String[] args) {
